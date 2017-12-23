@@ -25,6 +25,7 @@ public class loginTest extends Main{
 
         lp.driver = new ChromeDriver();
         driver.get(URL);
+        driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
@@ -59,7 +60,7 @@ public class loginTest extends Main{
     }
 
     @Test(dependsOnMethods = "checkFields")
-    public void send() throws InterruptedException {
+    public void send()  {
         ma.send();
         ma.goToFolder("Sent Mail");
         Assert.assertTrue(ma.getItem(SUBJECT));
@@ -67,7 +68,7 @@ public class loginTest extends Main{
 
     @Test(dependsOnMethods = "send")
     public void checkDraft() throws InterruptedException {
-        Thread.sleep(10000);
+        Thread.sleep(1000);
         ma.goToFolder("Drafts");
         Assert.assertFalse(ma.getItem(SUBJECT));
     }
