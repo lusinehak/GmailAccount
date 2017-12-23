@@ -1,0 +1,31 @@
+Test case : Login
+1. Open browser.
+2. Type URL "https://accounts.google.com"
+3. Type username on 'Email or Phone' field and click on 'Next' button.
+4. Type password on 'Enter your password' field and click on 'Next' button.
+5. Make sure that the user login successfully.
+
+Test case: Create email and save in drafts
+1. Click on the 'Compose' button.
+2. In the opened subwindow type:
+	email of the receiver in the 'To' field
+	Subject of the email in the 'Subject' field
+	Content of the email 
+3. Click on the 'X' button.
+4. Go to the 'Drafts' folder.
+5. Make sure that the above created email is saved.
+
+Test case: Check created email
+1. Go to the 'Drafts' folder.
+2. Click on the email created above.
+3. Make sure that the receiver, subject and content is the same as in previous scenario.
+
+Test case: Send email.
+1. Click on 'Send' button.
+2. Go to the 'Sent Mail' folder.
+3. Make sure that the email present.
+
+Test case: Check drafts:
+1. Go to the 'Drafts' folder.
+2. Make sure that the email is not present.
+

@@ -39,9 +39,8 @@ public class loginTest extends Main{
     }
 
     @Test(dependsOnMethods = "login")
-    public void composeMail() throws InterruptedException {
+    public void composeMail() {
         lp.goToMail();
-        Thread.sleep(1000);
         ma.compose();
         ma.setAddress(RECEIVER);
         ma.setSubject(SUBJECT);
@@ -55,14 +54,13 @@ public class loginTest extends Main{
     public void checkFields() {
         ma.clockOnDraftEmail(SUBJECT);
         Assert.assertEquals( ma.getAddress(RECEIVER), RECEIVER, "Invalid receiver");
-        Assert.assertEquals(ma.getSubject(SUBJECT), SUBJECT, "Invalid subject");
+        Assert.assertEquals( ma.getSubject(SUBJECT), SUBJECT, "Invalid subject");
         Assert.assertEquals( ma.getContent(), CONTENT,"Invalid content");
     }
 
     @Test(dependsOnMethods = "checkFields")
     public void send() throws InterruptedException {
         ma.send();
-        Thread.sleep(10000);
         ma.goToFolder("Sent Mail");
         Assert.assertTrue(ma.getItem(SUBJECT));
     }
@@ -74,14 +72,9 @@ public class loginTest extends Main{
         Assert.assertFalse(ma.getItem(SUBJECT));
     }
 
-    @Test(dependsOnMethods = "checkDraft")
-    public void logoff() {
-        ma.logout();
-    }
-
     @AfterClass
     public void quit() {
-
-       driver.quit();
+        ma.logout();
+        driver.quit();
     }
 }
