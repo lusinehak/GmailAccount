@@ -3,13 +3,20 @@ package tests;
 import PageObjects.LoginPage;
 import PageObjects.MailActions;
 import PageObjects.Main;
+import com.google.common.base.Function;
+import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import java.util.concurrent.TimeUnit;
+import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class loginTest extends Main{
 
@@ -21,19 +28,18 @@ public class loginTest extends Main{
         lp = new LoginPage();
         ma = new MailActions();
 
-        System.setProperty("webdriver.chrome.driver", "/home/lusine/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver", "chromedriver");
 
         lp.driver = new ChromeDriver();
         driver.get(URL);
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(10, SECONDS);
     }
 
     @Test
-    public void login() throws InterruptedException {
+    public void login() {
         lp.setUsername(USERNAME);
         lp.clickonNext();
-        Thread.sleep(1000);
         lp.setPassword(PASSWORD);
         lp.clickonNextForLogin();
         Assert.assertEquals(lp.verifyLogin(), "My Account");
@@ -68,6 +74,18 @@ public class loginTest extends Main{
 
     @Test(dependsOnMethods = "send")
     public void checkDraft() throws InterruptedException {
+        /*Wait wait = new FluentWait(driver)
+                .withTimeout(30, SECONDS)
+                .pollingEvery(5, SECONDS)
+                .ignoring(NoSuchElementException.class);
+
+        WebElement element = wait.until(new Function<WebDriver, WebElement>() {
+            public WebElement apply(WebDriver driver) {
+                String name = "Drafts";
+                WebElement element = driver.findElement(By.xpath("//a[contains(@title, '" + name + "')]"));
+                return  element;
+            }
+        });*/
         Thread.sleep(1000);
         ma.goToFolder("Drafts");
         Assert.assertFalse(ma.getItem(SUBJECT));

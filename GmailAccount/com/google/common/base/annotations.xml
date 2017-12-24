@@ -1,0 +1,5 @@
+<root>
+    <item name='com.google.common.base.Function'>
+        <annotation name='java.lang.Deprecated'/>
+    </item>
+</root>
