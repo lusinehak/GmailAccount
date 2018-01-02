@@ -3,76 +3,44 @@ package PageObjects;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage extends Main {
-    WebElement element;
+import java.util.List;
+
+import static PageObjects.Constants.driver;
+
+public class LoginPage {
+
     public void clickOnMoreOptions() {
-        try {
-            element = driver.findElement(By.xpath("//*[@class='IMH1vc lUHSR Hj2jlf']"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.click();
+        driver.findElement(By.xpath("//*[@class='IMH1vc lUHSR Hj2jlf']")).click();
     }
 
     public void createAccount() {
-        try {
-            element = driver.findElement(By.className("jO7h3c"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.click();
+        driver.findElement(By.className("jO7h3c")).click();
     }
 
     public void setUsername(String userName) {
-        try {
-            element = driver.findElement(By.id("identifierId"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.sendKeys(userName);
+        driver.findElement(By.id("identifierId")).sendKeys(userName);
     }
 
     public void setPassword(String passwd) {
-        try {
-            element = driver.findElement(By.name("password"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.sendKeys(passwd);
+        List<WebElement> element = driver.findElements(By.name("password"));
+        new WebDriverWait(driver, 5).until(ExpectedConditions.visibilityOfAllElements(element));
+        element.get(0).sendKeys(passwd);
     }
     public void clickonNext() {
-        try {
-            element = driver.findElement(By.id("identifierNext"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.click();
+        driver.findElement(By.id("identifierNext")).click();
     }
 
     public void clickonNextForLogin() {
-        try {
-            element = driver.findElement(By.id("passwordNext"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.click();
+        driver.findElement(By.id("passwordNext")).click();
     }
     public String verifyLogin() {
-        try {
-            element = driver.findElement(By.className("paz5i"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        return element.getText();
+        return driver.findElement(By.className("paz5i")).getText();
     }
 
     public void goToMail() {
-        try {
-            element = driver.findElement(By.cssSelector(".WaidBe"));
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-        element.click();
+        driver.findElement(By.cssSelector(".WaidBe")).click();
     }
 }
